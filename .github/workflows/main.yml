@@ -1,6 +1,9 @@
 name: My Workflow
 
-on: [push]
+on:
+  push:
+    tags:
+      - '*'
 
 jobs:
   my-job:
