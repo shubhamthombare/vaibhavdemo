@@ -10,23 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy to dev
-      if: ${{ github.ref == 'refs/heads/dev' }}
-      run: |
-        # Add steps to deploy to dev environment
-        echo "Current item: $dev"
-        
-    - name: Deploy to qa
-      if: ${{ github.ref == 'refs/heads/qa' }}
-      run: |
-        # Add steps to deploy to qa environment
-        
-    - name: Deploy to uat
-      if: ${{ github.ref == 'refs/heads/uat' }}
-      run: |
-        # Add steps to deploy to uat environment
-        
-    - name: Deploy to prod
-      if: ${{ github.ref == 'refs/heads/main' }}
-      run: |
-        # Add steps to deploy to prod environment
+    - name: Check if branch is main
+      if: github.ref == 'refs/heads/dev'
+      run: echo "The branch is dev"
+      
+    - name: Check if branch is not main
+      if: github.ref != 'refs/heads/main'
+      run: echo "The branch is not dev"
