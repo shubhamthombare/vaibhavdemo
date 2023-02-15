@@ -7,13 +7,15 @@ on:
 
 jobs:
   my-job:
+    strategy:
+      matrix:
+        tag: [ '*' ]
+
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check if branch is main
-      if: github.ref == 'refs/heads/dev'
-      run: echo "The branch is dev"
-      
-    - name: Check if branch is not main
-      if: github.ref != 'refs/heads/main'
-      run: echo "The branch is not dev"
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ matrix.tag }}
+ 
