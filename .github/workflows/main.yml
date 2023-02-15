@@ -9,13 +9,25 @@ jobs:
   my-job:
     strategy:
       matrix:
-        tag: [ '*' ]
+        tag: [dev,qa,prod ]
 
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ matrix.tag }}
- 
+    - name: Deploy to dev
+      if: ${{ github.ref == 'refs/heads/dev' }}
+      run: |
+        # Add steps to deploy to dev environment
+         echo "The branch is dev"
+         
+    - name: Deploy to qa
+      if: ${{ github.ref == 'refs/heads/qa' }}
+      run: |
+        # Add steps to deploy to qa environment
+        echo "The branch is qa"
+      
+    - name: Deploy to prod
+      if: ${{ github.ref == 'refs/heads/main' }}
+      run: |
+        # Add steps to deploy to prod environment
+        echo "The branch is prod"
